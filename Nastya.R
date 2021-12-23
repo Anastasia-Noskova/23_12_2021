@@ -134,7 +134,7 @@ park_area =st_area(park_sf) %>% as.integer()
 green_square = park_area * 0.8 
 
 # А также данные по осадкам
-Prcp_cum = Kurgan_cum %>% filter(year == 2013) %>% mutate(doy = yday(date)) %>% 
+Prcp_cum = Kurgan_cum %>% filter(year == 2018) %>% mutate(doy = yday(date)) %>% 
   dplyr::select(doy,prcp_cum) %>% mutate(water_cum = prcp_cum*park_area/1000)
 start_day = min(Prcp_cum$doy)
 end_day = max(Prcp_cum$doy)
@@ -168,6 +168,6 @@ ggplot(Prcp_cum, aes(x = doy,y = irrigation*1000))+
 ggplot(Prcp_cum, aes(x = doy,y = irrigation*1000))+
   geom_line( color="red")+
   geom_hline(yintercept = 0)+
-  ylim(c(-20,200))+ # Эти параметры вам надо подобрать исходя из ваших данных
+  ylim(c(-20,80))+ # Эти параметры вам надо подобрать исходя из ваших данных
   ylab("Irrigation needed,l/m2 for Kurgan park, 2018")+
   theme_bw()
